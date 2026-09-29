@@ -3,22 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Connect &amp; Watch | Official Links</title>
+  <title>Connect &amp; Watch | Official Hub</title>
   <meta name="description" content="Stay connected. Stay inspired. Explore my latest content, updates and videos — all in one place.">
-  <meta name="theme-color" content="#fff5f7">
+  <meta name="theme-color" content="#f8fafc">
 
   <!-- Open Graph / Social Sharing -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Connect &amp; Watch | Official Links">
+  <meta property="og:title" content="Connect &amp; Watch | Official Hub">
   <meta property="og:description" content="Stay connected. Stay inspired. Explore my latest content, updates and videos — all in one place.">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Connect &amp; Watch | Official Links">
+  <meta name="twitter:title" content="Connect &amp; Watch | Official Hub">
   <meta name="twitter:description" content="Stay connected. Stay inspired. Explore my latest content, updates and videos — all in one place.">
 
-  <!-- Typography -->
+  <!-- Premium Typography: Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     *, *::before, *::after {
@@ -29,33 +29,53 @@
     }
 
     :root {
-      --bg-base: #fcf9fb;
-      --card-bg: rgba(255, 255, 255, 0.72);
-      --card-border: rgba(255, 255, 255, 0.85);
-      --card-border-subtle: rgba(230, 215, 230, 0.45);
+      /* Brand Color Tokens */
+      --bg-base: #f8fafc;
+      --bg-subtle: #f1f5f9;
       
-      --text-main: #1e1b29;
-      --text-muted: #5e5972;
-      --text-subtle: #968fa3;
+      --navy-950: #070d18;
+      --navy-900: #0b1528;
+      --navy-800: #101e38;
+      --slate-600: #475569;
+      --slate-500: #64748b;
+      --slate-400: #94a3b8;
+      --slate-300: #cbd5e1;
+      --slate-200: #e2e8f0;
 
-      --ig-gradient: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-      --ig-shadow: 0 16px 36px -10px rgba(220, 39, 67, 0.22);
+      /* Electric & Cyber Accents */
+      --blue-electric: #2563eb;
+      --blue-vibrant: #1d4ed8;
+      --cyan-core: #0284c7;
+      --cyan-bright: #06b6d4;
+
+      /* Surface Tokens */
+      --surface-card: rgba(255, 255, 255, 0.88);
+      --border-card: rgba(226, 232, 240, 0.9);
+      --border-card-hover: rgba(59, 130, 246, 0.42);
       
-      --yt-gradient: linear-gradient(135deg, #ff334b 0%, #e60026 100%);
-      --yt-shadow: 0 16px 36px -10px rgba(255, 0, 51, 0.22);
+      --shadow-card: 
+        0 2px 4px rgba(15, 23, 42, 0.02),
+        0 10px 24px -4px rgba(15, 23, 42, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.95);
+      --shadow-card-hover: 
+        0 6px 14px -2px rgba(15, 23, 42, 0.03),
+        0 18px 32px -4px rgba(37, 99, 235, 0.11),
+        inset 0 1px 0 rgba(255, 255, 255, 1);
 
-      --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+      /* Micro Dynamics */
+      --ease-apple: cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     html {
       background-color: var(--bg-base);
       color-scheme: light;
+      font-size: 16px;
     }
 
     body {
       font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background-color: var(--bg-base);
-      color: var(--text-main);
+      color: var(--navy-900);
       min-height: 100vh;
       min-height: 100dvh;
       display: flex;
@@ -64,13 +84,15 @@
       justify-content: center;
       position: relative;
       overflow-x: hidden;
-      padding: calc(env(safe-area-inset-top, 0px) + 26px) 20px calc(env(safe-area-inset-bottom, 0px) + 24px);
+      padding: calc(env(safe-area-inset-top, 0px) + 24px) 20px calc(env(safe-area-inset-bottom, 0px) + 24px);
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
 
-    /* Vibrant Ambient Gradient Environment */
-    .ambient-canvas {
+    /* ==========================================================================
+       BACKGROUND ARCHITECTURE
+       ========================================================================== */
+    .bg-canvas {
       position: fixed;
       inset: 0;
       width: 100%;
@@ -78,374 +100,330 @@
       pointer-events: none;
       z-index: 0;
       overflow: hidden;
-      background: radial-gradient(at 0% 0%, #fff0f5 0%, #faf3fa 50%, #f7f3ff 100%);
     }
 
-    .blob {
+    /* Multi-stop Soft Base Gradient */
+    .bg-gradient-field {
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(ellipse 70% 50% at 50% -5%, rgba(224, 242, 254, 0.85) 0%, rgba(248, 250, 252, 0) 70%),
+        radial-gradient(ellipse 55% 45% at 88% 85%, rgba(219, 234, 254, 0.5) 0%, rgba(248, 250, 252, 0) 70%),
+        linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+    }
+
+    /* Precision Technical Grid */
+    .bg-grid-mesh {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(to right, rgba(148, 163, 184, 0.07) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(148, 163, 184, 0.07) 1px, transparent 1px);
+      background-size: 32px 32px;
+      mask-image: radial-gradient(circle at 50% 42%, rgba(0, 0, 0, 1) 25%, rgba(0, 0, 0, 0) 80%);
+      -webkit-mask-image: radial-gradient(circle at 50% 42%, rgba(0, 0, 0, 1) 25%, rgba(0, 0, 0, 0) 80%);
+      opacity: 0.85;
+    }
+
+    /* Soft Atmospheric Light Glows */
+    .ambient-glow {
       position: absolute;
       border-radius: 50%;
-      filter: blur(75px);
-      opacity: 0.68;
+      filter: blur(80px);
       pointer-events: none;
-      animation: floatMotion 18s ease-in-out infinite alternate;
+      opacity: 0.65;
     }
 
-    .blob-1 {
+    .ambient-glow-top {
       top: -10%;
-      left: -12%;
-      width: 380px;
-      height: 380px;
-      background: radial-gradient(circle, #fca5a5 0%, #f472b6 40%, #c084fc 80%);
-      animation-duration: 16s;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 480px;
+      height: 320px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.25) 0%, rgba(37, 99, 235, 0.14) 50%, transparent 80%);
     }
 
-    .blob-2 {
-      top: 25%;
-      right: -15%;
-      width: 360px;
-      height: 360px;
-      background: radial-gradient(circle, #fed7aa 0%, #fb923c 40%, #f43f5e 80%);
-      animation-duration: 20s;
-      animation-delay: -4s;
-    }
-
-    .blob-3 {
-      bottom: -15%;
-      left: 10%;
-      width: 420px;
-      height: 420px;
-      background: radial-gradient(circle, #93c5fd 0%, #c084fc 40%, #f472b6 80%);
-      animation-duration: 22s;
-      animation-delay: -8s;
-    }
-
-    .blob-4 {
-      top: 45%;
-      left: -10%;
-      width: 280px;
-      height: 280px;
-      background: radial-gradient(circle, #fde047 0%, #f97316 60%, transparent 80%);
-      opacity: 0.35;
-      animation-duration: 14s;
-      animation-delay: -2s;
-    }
-
-    @keyframes floatMotion {
-      0% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(25px, 20px) scale(1.08); }
-      100% { transform: translate(-20px, 30px) scale(0.95); }
-    }
-
-    /* Subtle Floating Sparkles */
-    .sparkle {
-      position: absolute;
-      color: rgba(192, 132, 252, 0.45);
-      font-size: 13px;
-      pointer-events: none;
-      user-select: none;
-      animation: pulseSparkle 4s ease-in-out infinite alternate;
-    }
-
-    .sparkle-1 { top: 12%; left: 16%; animation-delay: 0.5s; }
-    .sparkle-2 { top: 22%; right: 14%; animation-delay: 1.5s; color: rgba(244, 114, 182, 0.5); font-size: 15px; }
-    .sparkle-3 { bottom: 20%; left: 12%; animation-delay: 2.2s; color: rgba(251, 146, 60, 0.45); }
-    .sparkle-4 { bottom: 28%; right: 15%; animation-delay: 3s; font-size: 12px; }
-
-    @keyframes pulseSparkle {
-      0% { opacity: 0.2; transform: scale(0.8) rotate(0deg); }
-      100% { opacity: 0.85; transform: scale(1.15) rotate(15deg); }
-    }
-
-    /* Main Card Container */
-    .hub-wrapper {
-      width: 100%;
-      max-width: 440px;
+    /* ==========================================================================
+       CENTRAL LINK-IN-BIO CARD CONTAINER
+       ========================================================================== */
+    .bio-container {
       position: relative;
       z-index: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    /* Hero / Header Section */
-    .hero-section {
+      width: 100%;
+      max-width: 490px;
+      margin: 0 auto;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      width: 100%;
-      margin-bottom: 26px;
-      animation: entranceFade 0.5s var(--ease-spring) both;
+      animation: containerReveal 0.65s var(--ease-apple) both;
     }
 
-    /* Abstract Iridescent Orb Avatar */
-    .orb-stage {
+    @keyframes containerReveal {
+      from {
+        opacity: 0;
+        transform: translateY(16px) scale(0.99);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* ==========================================================================
+       HERO / IDENTITY SECTION
+       ========================================================================== */
+    .bio-header {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    /* Brand Logo Vessel: Abstract Link / Connection Mark */
+    .brand-mark-pedestal {
       position: relative;
-      width: 90px;
-      height: 90px;
+      width: 72px;
+      height: 72px;
+      margin-bottom: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 18px;
     }
 
-    .orb-glow {
+    /* Subtle Radial Atmospheric Glow beneath Logo */
+    .brand-glow-halo {
       position: absolute;
       inset: -6px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #f472b6, #fb923c, #93c5fd, #c084fc);
-      filter: blur(14px);
-      opacity: 0.65;
-      animation: orbPulse 6s ease-in-out infinite alternate;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.35) 0%, rgba(37, 99, 235, 0.18) 55%, transparent 75%);
+      filter: blur(12px);
+      z-index: 0;
     }
 
-    .orb-sphere {
+    /* 3D Glass & Chrome Shield Housing the Abstract Connection Glyph */
+    .brand-mark-emblem {
       position: relative;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 35%, #8ec5fc 70%, #e0c3fc 100%);
-      background-size: 200% 200%;
-      animation: gradientShift 8s ease infinite alternate;
-      border: 3px solid rgba(255, 255, 255, 0.85);
-      box-shadow: 0 14px 28px -6px rgba(244, 63, 94, 0.28),
-                  inset 0 2px 4px rgba(255, 255, 255, 0.8),
-                  inset 0 -6px 12px rgba(120, 53, 140, 0.35);
+      width: 66px;
+      height: 66px;
+      border-radius: 20px;
+      z-index: 1;
+      background: 
+        radial-gradient(circle at 35% 25%, rgba(255, 255, 255, 0.98) 0%, rgba(240, 249, 255, 0.75) 40%, rgba(224, 242, 254, 0.45) 75%, rgba(203, 213, 225, 0.8) 100%);
+      box-shadow: 
+        0 10px 24px -4px rgba(15, 23, 42, 0.08),
+        0 4px 10px -2px rgba(37, 99, 235, 0.16),
+        inset 0 1.5px 2px rgba(255, 255, 255, 1),
+        inset 0 -2px 5px rgba(15, 23, 42, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.9);
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
 
-    .orb-inner-gloss {
-      position: absolute;
-      top: 5px;
-      left: 12px;
+    .brand-mark-emblem svg {
       width: 36px;
-      height: 22px;
-      border-radius: 50%;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0) 100%);
-      transform: rotate(-25deg);
+      height: 36px;
+      display: block;
     }
 
-    .orb-center-sparkle {
-      color: #ffffff;
-      font-size: 24px;
-      filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2));
-      animation: gentleSpin 16s linear infinite;
-    }
-
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    @keyframes orbPulse {
-      0% { transform: scale(0.96); opacity: 0.55; }
-      100% { transform: scale(1.08); opacity: 0.8; }
-    }
-
-    @keyframes gentleSpin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    /* Small Elegant Label */
-    .badge-pill {
+    /* Eyebrow Label */
+    .eyebrow-pill {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
-      font-size: 0.6875rem;
+      gap: 9px;
+      font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: #9d3972;
-      background: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(244, 114, 182, 0.35);
-      border-radius: 999px;
-      padding: 5px 14px;
+      color: var(--slate-600);
       margin-bottom: 12px;
-      box-shadow: 0 4px 12px rgba(220, 39, 67, 0.08);
+      user-select: none;
     }
 
-    /* Friendly Bold Headline */
-    .hero-title {
-      font-size: 1.625rem;
+    .eyebrow-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--blue-electric);
+      box-shadow: 0 0 6px rgba(37, 99, 235, 0.7);
+    }
+
+    /* Editorial Headline */
+    .bio-title {
+      font-size: clamp(2rem, 5.2vw, 2.5rem);
       font-weight: 800;
-      line-height: 1.22;
-      letter-spacing: -0.03em;
-      color: var(--text-main);
-      margin-bottom: 8px;
+      line-height: 1.15;
+      letter-spacing: -0.035em;
+      color: var(--navy-950);
+      margin-bottom: 10px;
     }
 
-    .hero-title span {
-      background: linear-gradient(135deg, #e11d48 0%, #9333ea 100%);
+    .bio-title-gradient {
+      display: block;
+      background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 45%, #0284c7 80%, #06b6d4 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    /* Soft Subtitle Description */
-    .hero-desc {
-      font-size: 0.9rem;
-      font-weight: 500;
-      line-height: 1.45;
-      color: var(--text-muted);
-      max-width: 340px;
+    /* Subtitle Description */
+    .bio-desc {
+      font-size: 15px;
+      font-weight: 450;
+      line-height: 1.5;
+      color: var(--slate-500);
+      max-width: 360px;
+      margin: 0 auto;
     }
 
-    /* Main Links Stack */
-    .cards-stack {
+    /* ==========================================================================
+       LINK CARDS NAVIGATION
+       ========================================================================== */
+    .links-stack {
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 15px;
-      margin-bottom: 18px;
+      gap: 13px;
+      margin-bottom: 24px;
     }
 
-    /* Glassmorphism Social Cards */
-    .glass-card {
+    /* Premium Link Card Item */
+    .bio-link-card {
       position: relative;
+      width: 100%;
       display: flex;
       align-items: center;
-      width: 100%;
-      min-height: 76px;
-      padding: 15px 18px;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 22px;
+      background: var(--surface-card);
+      border: 1px solid var(--border-card);
+      border-radius: 20px;
+      box-shadow: var(--shadow-card);
       text-decoration: none;
       color: inherit;
-      background: var(--card-bg);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid var(--card-border);
-      border-radius: 22px;
-      box-shadow: 0 10px 28px -6px rgba(135, 115, 150, 0.12),
-                  0 2px 6px rgba(255, 255, 255, 0.9);
-      transition: transform 0.28s var(--ease-spring),
-                  box-shadow 0.28s var(--ease-spring),
-                  border-color 0.28s var(--ease-spring),
-                  background 0.28s var(--ease-spring);
-      cursor: pointer;
-      user-select: none;
-      outline: none;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: 
+        transform 0.28s var(--ease-apple),
+        box-shadow 0.28s var(--ease-apple),
+        border-color 0.28s var(--ease-apple);
+      overflow: hidden;
     }
 
-    .glass-card:focus-visible {
-      border-color: #ec4899;
-      box-shadow: 0 0 0 4px rgba(236, 72, 153, 0.2);
+    /* Specular Reflection Highlight */
+    .bio-link-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 12%;
+      right: 12%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.95) 50%, transparent 100%);
+      pointer-events: none;
     }
 
-    /* Card Stagger Entrance */
-    .card-ig {
-      animation: entranceFadeUp 0.5s var(--ease-spring) 0.1s both;
+    /* Hover Micro-Interactions */
+    .bio-link-card:hover {
+      transform: translateY(-2.5px);
+      border-color: var(--border-card-hover);
+      box-shadow: var(--shadow-card-hover);
     }
 
-    .card-yt {
-      animation: entranceFadeUp 0.5s var(--ease-spring) 0.2s both;
+    .bio-link-card:active {
+      transform: scale(0.985);
+      transition-duration: 0.12s;
     }
 
-    /* Card Icon Area */
-    .card-icon-wrapper {
+    /* Left Group */
+    .card-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      text-align: left;
+    }
+
+    /* Clean Brand Icon Frame */
+    .card-icon-container {
+      position: relative;
       width: 48px;
       height: 48px;
-      border-radius: 15px;
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-right: 15px;
       flex-shrink: 0;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 6px 16px -3px rgba(0, 0, 0, 0.15),
-                  inset 0 1px 1px rgba(255, 255, 255, 0.4);
-      transition: transform 0.28s var(--ease-spring);
+      background: #ffffff;
+      border: 1px solid rgba(226, 232, 240, 0.95);
+      box-shadow: 0 4px 10px rgba(15, 23, 42, 0.04);
+      transition: transform 0.28s var(--ease-apple), box-shadow 0.28s var(--ease-apple);
     }
 
-    .card-icon-wrapper svg {
+    .bio-link-card:hover .card-icon-container {
+      transform: scale(1.05);
+      box-shadow: 0 6px 14px rgba(15, 23, 42, 0.08);
+    }
+
+    .card-icon-container svg {
       width: 24px;
       height: 24px;
-      fill: #ffffff;
-      position: relative;
-      z-index: 1;
+      display: block;
     }
 
-    /* Instagram Card Details */
-    .card-ig .card-icon-wrapper {
-      background: var(--ig-gradient);
+    /* Real Brand Gradients/Colors (Isolated to SVGs) */
+    .svg-ig-gradient {
+      fill: url(#instagramBrandGrad);
     }
 
-    .card-ig:hover {
-      background: rgba(255, 255, 255, 0.88);
-      border-color: rgba(244, 114, 182, 0.6);
-      transform: translateY(-3px) scale(1.01);
-      box-shadow: 0 16px 36px -8px rgba(220, 39, 67, 0.22),
-                  0 4px 12px rgba(255, 255, 255, 0.9);
+    .svg-yt-red {
+      fill: #ff0000;
     }
 
-    .card-ig:hover .card-icon-wrapper {
-      transform: scale(1.05) rotate(2deg);
-    }
-
-    /* YouTube Card Details */
-    .card-yt .card-icon-wrapper {
-      background: var(--yt-gradient);
-    }
-
-    .card-yt:hover {
-      background: rgba(255, 255, 255, 0.88);
-      border-color: rgba(255, 100, 120, 0.6);
-      transform: translateY(-3px) scale(1.01);
-      box-shadow: 0 16px 36px -8px rgba(255, 0, 51, 0.2),
-                  0 4px 12px rgba(255, 255, 255, 0.9);
-    }
-
-    .card-yt:hover .card-icon-wrapper {
-      transform: scale(1.05) rotate(-2deg);
-    }
-
-    /* Content Area */
-    .card-text-group {
+    /* Card Text Stack */
+    .card-meta {
       display: flex;
       flex-direction: column;
-      flex-grow: 1;
-      justify-content: center;
-      min-width: 0;
+      gap: 2px;
     }
 
     .card-heading {
-      font-size: 1.05rem;
+      font-size: 16px;
       font-weight: 700;
-      color: var(--text-main);
+      color: var(--navy-950);
       letter-spacing: -0.015em;
       line-height: 1.25;
     }
 
-    .card-subheading {
-      font-size: 0.825rem;
+    .card-caption {
+      font-size: 13.5px;
       font-weight: 500;
-      color: var(--text-muted);
-      margin-top: 3px;
+      color: var(--slate-500);
+      line-height: 1.35;
     }
 
-    /* Trailing Action Arrow */
-    .card-arrow {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: rgba(240, 235, 245, 0.6);
+    /* Right Action Arrow Button */
+    .card-arrow-circle {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-left: 10px;
       flex-shrink: 0;
-      color: var(--text-muted);
-      transition: transform 0.25s var(--ease-spring),
-                  background-color 0.25s ease,
-                  color 0.25s ease;
+      background: rgba(241, 245, 249, 0.7);
+      border: 1px solid rgba(226, 232, 240, 0.85);
+      color: var(--slate-500);
+      transition: 
+        transform 0.28s var(--ease-apple),
+        background-color 0.28s var(--ease-apple),
+        color 0.28s var(--ease-apple),
+        border-color 0.28s var(--ease-apple);
     }
 
-    .card-arrow svg {
+    .card-arrow-circle svg {
       width: 16px;
       height: 16px;
       stroke: currentColor;
@@ -453,80 +431,148 @@
       fill: none;
       stroke-linecap: round;
       stroke-linejoin: round;
-      transition: transform 0.25s var(--ease-spring);
+      transition: transform 0.28s var(--ease-apple);
     }
 
-    .glass-card:hover .card-arrow {
-      color: #e11d48;
-      background: rgba(254, 226, 226, 0.7);
-      transform: translateX(3px);
+    .bio-link-card:hover .card-arrow-circle {
+      transform: translateX(3.5px);
+      background: rgba(37, 99, 235, 0.08);
+      border-color: rgba(37, 99, 235, 0.25);
+      color: var(--blue-electric);
     }
 
-    .glass-card:active {
-      transform: scale(0.98) !important;
-    }
-
-    /* Teaser Note */
-    .teaser-line {
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      color: #a855f7;
+    /* ==========================================================================
+       MORE COMING SOON DIVIDER
+       ========================================================================== */
+    .coming-soon-bar {
+      width: 100%;
       display: flex;
       align-items: center;
-      gap: 6px;
-      margin-bottom: 22px;
-      opacity: 0.85;
-      animation: entranceFade 0.5s var(--ease-spring) 0.3s both;
+      gap: 16px;
+      margin: 2px 0 20px;
     }
 
-    /* Minimal Elegant Footer */
-    .hub-footer {
-      text-align: center;
-      animation: entranceFade 0.5s var(--ease-spring) 0.35s both;
+    .bar-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(203, 213, 225, 0.75), transparent);
     }
 
-    .footer-heart-note {
-      font-size: 0.8125rem;
+    .bar-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--slate-400);
+      user-select: none;
+    }
+
+    .bar-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background-color: var(--blue-electric);
+      opacity: 0.8;
+    }
+
+    /* ==========================================================================
+       CLEAN EXECUTIVE FOOTER
+       ========================================================================== */
+    .bio-footer {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footer-text {
+      font-size: 12.5px;
       font-weight: 500;
-      color: var(--text-muted);
-      letter-spacing: 0.01em;
+      color: var(--slate-400);
+      letter-spacing: -0.01em;
     }
 
-    /* Entrance Keyframes */
-    @keyframes entranceFade {
-      from {
-        opacity: 0;
-        transform: translateY(8px);
+    /* ==========================================================================
+       RESPONSIVE ERGONOMICS
+       ========================================================================== */
+    @media (max-width: 480px) {
+      body {
+        padding: calc(env(safe-area-inset-top, 0px) + 20px) 16px calc(env(safe-area-inset-bottom, 0px) + 18px);
       }
-      to {
-        opacity: 1;
-        transform: translateY(0);
+
+      .bio-header {
+        margin-bottom: 20px;
+      }
+
+      .brand-mark-pedestal {
+        width: 66px;
+        height: 66px;
+        margin-bottom: 16px;
+      }
+
+      .brand-mark-emblem {
+        width: 60px;
+        height: 60px;
+        border-radius: 18px;
+      }
+
+      .brand-mark-emblem svg {
+        width: 32px;
+        height: 32px;
+      }
+
+      .bio-title {
+        font-size: 1.95rem;
+      }
+
+      .bio-desc {
+        font-size: 14.5px;
+      }
+
+      .bio-link-card {
+        padding: 16px 18px;
+        border-radius: 18px;
+      }
+
+      .card-icon-container {
+        width: 44px;
+        height: 44px;
+      }
+
+      .card-icon-container svg {
+        width: 22px;
+        height: 22px;
+      }
+
+      .card-heading {
+        font-size: 15.5px;
+      }
+
+      .card-caption {
+        font-size: 13px;
       }
     }
 
-    @keyframes entranceFadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(14px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Touch screen ergonomics */
+    /* Touch screen device adaptations */
     @media (hover: none) and (pointer: coarse) {
-      .glass-card:hover {
+      .bio-link-card:hover {
         transform: none;
       }
-      .glass-card:active {
-        transform: scale(0.98);
+      .bio-link-card:hover .card-arrow-circle {
+        transform: none;
+      }
+      .bio-link-card:hover .card-icon-container {
+        transform: none;
+      }
+      .bio-link-card:active {
+        transform: scale(0.985);
       }
     }
 
-    /* Reduced Motion */
+    /* Accessibility: Reduced Motion */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation: none !important;
@@ -537,72 +583,113 @@
 </head>
 <body>
 
-  <!-- Ambient Vibrant Blurred Gradient Environment -->
-  <div class="ambient-canvas" aria-hidden="true">
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-    <div class="blob blob-3"></div>
-    <div class="blob blob-4"></div>
-
-    <!-- Delicate Aesthetic Sparkles -->
-    <span class="sparkle sparkle-1">✦</span>
-    <span class="sparkle sparkle-2">♡</span>
-    <span class="sparkle sparkle-3">✦</span>
-    <span class="sparkle sparkle-4">+</span>
+  <!-- Background Environment -->
+  <div class="bg-canvas" aria-hidden="true">
+    <div class="bg-gradient-field"></div>
+    <div class="bg-grid-mesh"></div>
+    <div class="ambient-glow ambient-glow-top"></div>
   </div>
 
-  <!-- Main Content Hub -->
-  <main class="hub-wrapper">
+  <!-- Isolated Gradients Definition -->
+  <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
+    <defs>
+      <!-- Real Instagram Brand Gradient -->
+      <linearGradient id="instagramBrandGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#f09433"/>
+        <stop offset="25%" stop-color="#e6683c"/>
+        <stop offset="50%" stop-color="#dc2743"/>
+        <stop offset="75%" stop-color="#cc2366"/>
+        <stop offset="100%" stop-color="#bc1888"/>
+      </linearGradient>
 
-    <!-- Header Section -->
-    <header class="hero-section">
-      <!-- Abstract Iridescent Gradient Orb Avatar -->
-      <div class="orb-stage" aria-hidden="true">
-        <div class="orb-glow"></div>
-        <div class="orb-sphere">
-          <div class="orb-inner-gloss"></div>
-          <span class="orb-center-sparkle">✦</span>
+      <!-- Abstract Brand Logo Chrome/Glass Gradient -->
+      <linearGradient id="brandChrome" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#ffffff"/>
+        <stop offset="35%" stop-color="#e0f2fe"/>
+        <stop offset="70%" stop-color="#38bdf8"/>
+        <stop offset="100%" stop-color="#1d4ed8"/>
+      </linearGradient>
+
+      <!-- Core Interlock Gradient -->
+      <linearGradient id="brandElectric" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#38bdf8"/>
+        <stop offset="50%" stop-color="#2563eb"/>
+        <stop offset="100%" stop-color="#0b1528"/>
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <!-- Central Link-in-Bio Card -->
+  <main class="bio-container">
+
+    <!-- Header & Identity Section -->
+    <header class="bio-header">
+
+      <!-- Abstract Connection & Digital Movement Brand Mark -->
+      <div class="brand-mark-pedestal" aria-hidden="true">
+        <div class="brand-glow-halo"></div>
+        <div class="brand-mark-emblem">
+          <!-- Sleek Geometric Infinity/Connection Symbol -->
+          <svg viewBox="0 0 48 48" fill="none">
+            <!-- Interlocking Left Connection Loop -->
+            <path 
+              d="M17 16C12.5817 16 9 19.5817 9 24C9 28.4183 12.5817 32 17 32C20.6729 32 23.7749 29.5186 24.7071 26.1213L21.4142 24.8284C20.8877 26.6806 19.1179 28 17 28C14.7909 28 13 26.2091 13 24C13 21.7909 14.7909 20 17 20C19.1179 20 20.8877 21.3194 21.4142 23.1716L24.7071 21.8787C23.7749 18.4814 20.6729 16 17 16Z" 
+              fill="url(#brandChrome)"
+            />
+            <!-- Interlocking Right Connection Loop -->
+            <path 
+              d="M31 16C27.3271 16 24.2251 18.4814 23.2929 21.8787L26.5858 23.1716C27.1123 21.3194 28.8821 20 31 20C33.2091 20 35 21.7909 35 24C35 26.2091 33.2091 28 31 28C28.8821 28 27.1123 26.6806 26.5858 24.8284L23.2929 26.1213C24.2251 29.5186 27.3271 32 31 32C35.4183 32 39 28.4183 39 24C39 19.5817 35.4183 16 31 16Z" 
+              fill="url(#brandElectric)"
+            />
+            <!-- Precision Dynamic Center Pivot -->
+            <circle cx="24" cy="24" r="2.2" fill="#38bdf8"/>
+          </svg>
         </div>
       </div>
 
-      <!-- Small Aesthetic Pill Label -->
-      <div class="badge-pill">
-        LOVE TO CONNECT ✦
+      <!-- Eyebrow Label -->
+      <div class="eyebrow-pill">
+        <span class="eyebrow-dot" aria-hidden="true"></span>
+        <span>LOVE TO CONNECT</span>
+        <span class="eyebrow-dot" aria-hidden="true"></span>
       </div>
 
       <!-- Main Headline -->
-      <h1 class="hero-title">
-        Stay Connected. <span>Stay Inspired.</span>
+      <h1 class="bio-title">
+        Stay Connected.
+        <span class="bio-title-gradient">Stay Inspired.</span>
       </h1>
 
-      <!-- Subtitle Description -->
-      <p class="hero-desc">
+      <!-- Controlled Subtitle -->
+      <p class="bio-desc">
         Explore my latest content, updates and videos — all in one place.
       </p>
     </header>
 
-    <!-- Social Cards Navigation Stack -->
-    <nav class="cards-stack" aria-label="Featured Social Links">
+    <!-- Social Links Stack -->
+    <nav class="links-stack" aria-label="Featured Social Media">
 
-      <!-- Instagram Card -->
+      <!-- Instagram Link Card -->
       <a 
         href="https://www.instagram.com/reel/DbXLURQyYeU/?stkn=cm1scmxhMXZlbThi" 
         target="_blank" 
         rel="noopener noreferrer" 
-        class="glass-card card-ig"
+        class="bio-link-card"
         id="link-instagram"
       >
-        <div class="card-icon-wrapper" aria-hidden="true">
-          <!-- Inline Instagram Icon -->
-          <svg viewBox="0 0 24 24">
-            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-          </svg>
+        <div class="card-left">
+          <div class="card-icon-container" aria-hidden="true">
+            <!-- Inline Instagram Icon with Pure Brand Gradient -->
+            <svg viewBox="0 0 24 24">
+              <path class="svg-ig-gradient" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+          </div>
+          <div class="card-meta">
+            <span class="card-heading">Instagram</span>
+            <span class="card-caption">Watch my latest Reel</span>
+          </div>
         </div>
-        <div class="card-text-group">
-          <span class="card-heading">Instagram</span>
-          <span class="card-subheading">Watch my latest Reel</span>
-        </div>
-        <div class="card-arrow" aria-hidden="true">
+        <div class="card-arrow-circle" aria-hidden="true">
           <svg viewBox="0 0 24 24">
             <line x1="5" y1="12" x2="19" y2="12"></line>
             <polyline points="12 5 19 12 12 19"></polyline>
@@ -610,25 +697,27 @@
         </div>
       </a>
 
-      <!-- YouTube Card -->
+      <!-- YouTube Link Card -->
       <a 
         href="https://youtube.com/shorts/tToLcHW1ZJo?si=6pUk8mceNavgaMMC" 
         target="_blank" 
         rel="noopener noreferrer" 
-        class="glass-card card-yt"
+        class="bio-link-card"
         id="link-youtube"
       >
-        <div class="card-icon-wrapper" aria-hidden="true">
-          <!-- Inline YouTube Icon -->
-          <svg viewBox="0 0 24 24">
-            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-          </svg>
+        <div class="card-left">
+          <div class="card-icon-container" aria-hidden="true">
+            <!-- Inline YouTube Icon with Pure Red Accent -->
+            <svg viewBox="0 0 24 24">
+              <path class="svg-yt-red" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+          </div>
+          <div class="card-meta">
+            <span class="card-heading">YouTube</span>
+            <span class="card-caption">Watch my latest Short</span>
+          </div>
         </div>
-        <div class="card-text-group">
-          <span class="card-heading">YouTube</span>
-          <span class="card-subheading">Watch my latest Short</span>
-        </div>
-        <div class="card-arrow" aria-hidden="true">
+        <div class="card-arrow-circle" aria-hidden="true">
           <svg viewBox="0 0 24 24">
             <line x1="5" y1="12" x2="19" y2="12"></line>
             <polyline points="12 5 19 12 12 19"></polyline>
@@ -638,15 +727,19 @@
 
     </nav>
 
-    <!-- Subtle Teaser Line -->
-    <div class="teaser-line">
-      <span>More coming soon</span>
-      <span>✦</span>
+    <!-- Subdued Divider: More Coming Soon with Thin Geometric Lines -->
+    <div class="coming-soon-bar" aria-hidden="true">
+      <div class="bar-line"></div>
+      <span class="bar-label">
+        <span>MORE COMING SOON</span>
+        <span class="bar-dot"></span>
+      </span>
+      <div class="bar-line"></div>
     </div>
 
-    <!-- Minimal Elegant Footer -->
-    <footer class="hub-footer">
-      <p class="footer-heart-note">Thanks for stopping by ♡</p>
+    <!-- Minimalist Understated Footer -->
+    <footer class="bio-footer">
+      <p class="footer-text">Thanks for stopping by.</p>
     </footer>
 
   </main>
